@@ -12,6 +12,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace icmpGraph
 {
@@ -25,7 +26,8 @@ namespace icmpGraph
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            trackBar2.Value = 5;
+            comboBox1.Text = "Bright";
         }
 
         private void textBox1_KeyDown(object sender, KeyEventArgs e)
@@ -123,7 +125,7 @@ namespace icmpGraph
                 {
                     chart1.Series.Add(listView1.Items[i].Text);
                     chart1.Series[chart1.Series.Count - 1].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-                    
+                    chart1.Series[chart1.Series.Count - 1].BorderWidth = trackBar2.Value;
                 }
                 
                 debug.verbose($"Sending ping to [{listView1.Items[i].Text}]");
@@ -192,6 +194,7 @@ namespace icmpGraph
         {
             listView1.Items.Clear();
             ips.Clear();
+            chart1.Series.Clear();
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -200,6 +203,60 @@ namespace icmpGraph
             {
                 listView1.Items[(int)item].Remove();
             }
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (comboBox1.SelectedItem.ToString())
+            {
+                case "Bright":
+                    chart1.Palette = ChartColorPalette.Bright;
+                    break;
+                case "Bright Pastel":
+                    chart1.Palette = ChartColorPalette.BrightPastel;
+                    break;
+                case "Grayscale":
+                    chart1.Palette = ChartColorPalette.Grayscale;
+                    break;
+                case "Excel":
+                    chart1.Palette = ChartColorPalette.Excel;
+                    break;
+                case "Light":
+                    chart1.Palette = ChartColorPalette.Light;
+                    break;
+                case "Pastel":
+                    chart1.Palette = ChartColorPalette.Pastel;
+                    break;
+                case "Earth Tones":
+                    chart1.Palette = ChartColorPalette.EarthTones;
+                    break;
+                case "Semi Transparent":
+                    chart1.Palette = ChartColorPalette.SemiTransparent;
+                    break;
+                case "Berry":
+                    chart1.Palette = ChartColorPalette.Berry;
+                    break;
+                case "Chocolate":
+                    chart1.Palette = ChartColorPalette.Chocolate;
+                    break;
+                case "Fire":
+                    chart1.Palette = ChartColorPalette.Fire;
+                    break;
+                case "Sea Green":
+                    chart1.Palette = ChartColorPalette.SeaGreen;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void trackBar2_Scroll(object sender, EventArgs e)
+        {
+            foreach (var ser in chart1.Series)
+            {
+                ser.BorderWidth = trackBar2.Value;
+            }
+            label4.Text = $"{trackBar2.Value}\nThickness:";
         }
     }
 }
