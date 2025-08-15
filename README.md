@@ -4,4 +4,4 @@ Graph response time of multiple IP addresses.
 ![Screenshot 1](screenshot1.png)
 ![Screenshot 2](screenshot2.png)
 ## Binary
-Located [here](/raw/refs/heads/main/bin/Debug/icmpGraph.exe)
+Located [here](https://raw.githubusercontent.com/epyon0/icmpGraph/refs/heads/main/bin/Debug/icmpGraph.exe)
