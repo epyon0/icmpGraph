@@ -56,6 +56,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.trackBar2 = new System.Windows.Forms.TrackBar();
             this.label4 = new System.Windows.Forms.Label();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.Ping.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
@@ -81,6 +83,7 @@
             // Ping
             // 
             this.Ping.BackColor = System.Drawing.SystemColors.Control;
+            this.Ping.Controls.Add(this.button5);
             this.Ping.Controls.Add(this.button3);
             this.Ping.Controls.Add(this.button2);
             this.Ping.Controls.Add(this.label2);
@@ -226,6 +229,7 @@
             // Graph
             // 
             this.Graph.BackColor = System.Drawing.SystemColors.Control;
+            this.Graph.Controls.Add(this.button4);
             this.Graph.Controls.Add(this.label4);
             this.Graph.Controls.Add(this.trackBar2);
             this.Graph.Controls.Add(this.label3);
@@ -300,7 +304,6 @@
             // 
             this.trackBar2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.trackBar2.Location = new System.Drawing.Point(466, 379);
-            this.trackBar2.Maximum = 50;
             this.trackBar2.Minimum = 1;
             this.trackBar2.Name = "trackBar2";
             this.trackBar2.Size = new System.Drawing.Size(104, 45);
@@ -316,7 +319,29 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(67, 26);
             this.label4.TabIndex = 4;
-            this.label4.Text = "10\r\nThickness:";
+            this.label4.Text = "5\r\nThickness:";
+            // 
+            // button4
+            // 
+            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button4.Location = new System.Drawing.Point(259, 385);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(128, 23);
+            this.button4.TabIndex = 5;
+            this.button4.Text = "Save Chart";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // button5
+            // 
+            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button5.Location = new System.Drawing.Point(7, 330);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(128, 23);
+            this.button5.TabIndex = 8;
+            this.button5.Text = "Save CSV";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // Form1
             // 
@@ -366,6 +391,8 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TrackBar trackBar2;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button button5;
     }
 }
 

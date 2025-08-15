@@ -5,6 +5,8 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 using System.Net.NetworkInformation;
 using System.Security.Cryptography.X509Certificates;
@@ -58,6 +60,7 @@ namespace icmpGraph
                     listView1.Items.Add(textBox1.Text);
                     ips.Add(textBox1.Text, new List<double>());
                     textBox1.Clear();
+                    listView1.Columns[0].Width = -2;
                 }
             }
         }
@@ -257,6 +260,62 @@ namespace icmpGraph
                 ser.BorderWidth = trackBar2.Value;
             }
             label4.Text = $"{trackBar2.Value}\nThickness:";
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "PNG Image|*.png|JPEG Image|*.jpg|BMP Image|*.bmp|TIFF Image|*.tif|GIF Image|*.gif";
+            saveFileDialog.Title = "Save Chart Image";
+            saveFileDialog.FileName = "icmp chart.png";
+
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                debug.verbose($"Saving chart image as: [{saveFileDialog.FileName}] with extension: [{Path.GetExtension(saveFileDialog.FileName)}]");
+                switch(Path.GetExtension(saveFileDialog.FileName).ToLower())
+                {
+                    case ".png":
+                        chart1.SaveImage(saveFileDialog.FileName, ImageFormat.Png);
+                        break;
+                    case ".jpg":
+                        chart1.SaveImage(saveFileDialog.FileName, ImageFormat.Jpeg);
+                        break;
+                    case ".bmp":
+                        chart1.SaveImage(saveFileDialog.FileName, ImageFormat.Bmp);
+                        break;
+                    case ".tif":
+                        chart1.SaveImage(saveFileDialog.FileName, ImageFormat.Tiff);
+                        break;
+                    case ".gif":
+                        chart1.SaveImage(saveFileDialog.FileName, ImageFormat.Gif);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "CSV File|*.csv";
+            saveFileDialog.Title = "Save CSV File";
+            saveFileDialog.FileName = "icmp data.csv";
+
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                File.WriteAllText(saveFileDialog.FileName, "");
+                foreach (KeyValuePair<string, List<double>> kvp in ips)
+                {
+                    string addr = kvp.Key;
+                    File.AppendAllText(saveFileDialog.FileName, $"{addr},");
+                    foreach (double t in kvp.Value)
+                    {
+                        File.AppendAllText(saveFileDialog.FileName, $"{t},");
+                    }
+                    File.AppendAllText(saveFileDialog.FileName, Environment.NewLine);
+                }
+            }
         }
     }
 }
